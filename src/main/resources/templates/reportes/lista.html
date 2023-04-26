@@ -4,7 +4,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
 </head>
-
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
@@ -31,12 +30,28 @@
     </div>
 </nav>
 
-<!-- Contenido de la página -->
-<h3>Recursos Humanos - TravelTrip</h3>
-<div style="text-align: center;">
-    <img th:src="@{travel_trip_logo.png}" width="900px", height="1000px">
-</div>
+<table class="table">
+
+    <tr>
+        <th>Puesto</th>
+        <th>Salario Máximo</th>
+        <th>Salario Mínimo</th>
+        <th>Salario Total</th>
+        <th>Salario Promedio</th>
+
+        <th></th>
+        <th></th>
+    </tr>
+
+
+    <tr th:each="reportes, info : ${listareportes}">
+        <td th:text="${reportes.getjob_title}"></td>
+        <td th:text="${reportes.getmaxsalary()}"></td>
+        <td th:text="${reportes.getminsalary()}"></td>
+        <td th:text="${reportes.gettotalsalary()}"></td>
+        <td th:text="${reportes.getpromediosalary()}"></td>
+    </tr>
+
+</table>
 </body>
 </html>
-
-

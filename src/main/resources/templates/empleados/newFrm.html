@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+  <title>Nuevo Empleado</title>
+
+</head>
+<body>
+<main>
+  <div class="container px-4 py-5">
+    <h1 class="pb-2 mb-3 border-bottom">Nuevo Ingreso</h1>
+    <form method="post" th:action="@{'/save'}" class="mt-2">
+
+      <div class="mb-3">
+        <label  class="form-label">Nombre </label>
+        <input type="text" class="form-control" name="firstName" required>
+      </div>
+
+      <div class="mb-3">
+        <label  class="form-label">Apellidos </label>
+        <input type="text" class="form-control" name="lastName" required>
+      </div>
+
+      <div class="mb-3">
+        <label  class="form-label">Email </label>
+        <input type="text" class="form-control" name="email" required>
+      </div>
+
+      <div class="mb-3">
+        <label  class="form-label">Constraseña </label>
+        <input type="text" class="form-control" name="password" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="category" class="form-label">Puesto</label>
+        <select name="jobs" class="form-select" id="category">
+          <option th:each="puestos : ${listaPuestos}" th:text="${puestos.getJobTitle()}"
+                  th:value="${puestos.getJobId()}"></option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label  class="form-label">Sueldo </label>
+        <input type="text" class="form-control" name="salary" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="supplier" class="form-label">Jefe</label>
+        <select name="managerId" class="form-select" id="supplier">
+          <option th:each="jefe : ${listaJefes}" th:text="${jefe.getFirstName()}"
+                  th:value="${jefe.getEmployeeId()}"></option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="supplier" class="form-label">Departamentos</label>
+        <select name="departments" class="form-select" id="departamentos">
+          <option th:each="departamento : ${listaDepart}" th:text="${departamento.getDepartmentName()}"
+                  th:value="${departamento.getDepartmentId()}"></option>
+        </select>
+      </div>
+
+
+
+
+      <a th:href="@{'/listaempleados'}" class="btn btn-danger">Cancelar</a>
+      <button type="submit" class="btn btn-primary">Registrar</button>
+    </form>
+  </div>
+</main>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
