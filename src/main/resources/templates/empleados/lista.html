@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/inicio}">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/listamascotas}">Empleados</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/contacto}">Historial</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/servicio}">Reportes</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="d-flex mt-3 mb-4">
+    <a class="btn btn-primary" th:href="@{'/shipper/new'}">Nuevo Empleado</a>
+</div>
+<form method="post" th:action="@{/shipper/BuscarTransportistas}">
+    <input name="searchField" class="form-control mb-3" type="text" placeholder="Search"/>
+</form>
+<div class="alert alert-success" role="alert" th:if="${msg != null}" th:text="${msg}">
+    A simple success alert—check it out!
+</div>
+<table class="table">
+
+    <tr>
+        <th>#</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Puesto</th>
+        <th>Departamento</th>
+        <th>Ciudad</th>
+        <th>Editar</th>
+        <th>Borrar</th>
+        <th></th>
+        <th></th>
+    </tr>
+
+
+    <tr th:each="employees, info : ${listaempleados}">
+        <td th:text="${info.index + 1}"></td>
+        <td th:text="${employees.firstName}"></td>
+        <td th:text="${employees.lastName}"></td>
+        <td th:text="${employees.jobs.jobTitle}"></td>
+        <td th:text="${employees.departments.departmentName}"></td>
+        <td th:text="${employees.departments.locations.getCity()}"></td>
+
+        <td><a class="btn btn-primary" th:href="@{'/edit' + '?id=' + ${employees.employeeId}}">Editar</a>
+        </td>
+        <td><a class="btn btn-danger" th:href="@{'/delete' + '?id=' + ${employees.employeeId}}">Borrar</a>
+        </td>
+    </tr>
+
+</table>
+</body>
+</html>

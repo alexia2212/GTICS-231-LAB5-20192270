@@ -1,0 +1,43 @@
+!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <title>Editar Empleado</title>
+</head>
+<body>
+<main>
+    <div class="container px-4 py-5">
+        <h1 class="pb-2 mb-3 border-bottom">Editar Empleado</h1>
+        <form method="post" th:action="@{'/save'}" th:object="${empleados}" class="mt-2">
+            <input th:field="*{id}" name="id" type="hidden"/>
+            <div class="mb-3">
+                <label class="form-label">Nombre</label>
+                <input th:field="*{employees.firstName}" type="text" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Apellido</label>
+                <input th:field="*{employees.lastName}" type="text" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Puesto</label>
+                <input th:field="${employees.jobs.jobTitle}" type="text" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Departamento</label>
+                <input th:field="${employees.departments.departmentName}" type="text" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Ciudad</label>
+                <input th:field="${employees.departments.locations.getCity(}" type="text" class="form-control">
+            </div>
+
+            <a th:href="@{'/listaempleados'}" class="btn btn-danger">Cancelar</a>
+            <button type="submit" class="btn btn-primary">Registrar</button>
+        </form>
+    </div>
+</main>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
